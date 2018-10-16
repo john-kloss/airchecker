@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "airchecker",
-    "description": "This project is really great.",
+    "description": "This is an ITS project.",
     "slug": "airchecker",
     "privacy": "public",
     "sdkVersion": "30.0.0",
@@ -17,9 +17,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     }
