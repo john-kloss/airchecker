@@ -1,7 +1,22 @@
 import React from "react";
-import { View, Button, StyleSheet } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  Button,
+  RefreshControl,
+  StyleSheet
+} from "react-native";
 
 export default class HomeScreen extends React.Component {
+  state = {
+    refreshing: false,
+    values: [
+      { title: "Birkenpollen", value: 3 },
+      { title: "CO2", value: 5 },
+      { title: "Wurst", value: 2 }
+    ]
+  };
   static navigationOptions = {
     title: "Home",
     headerStyle: {
@@ -13,15 +28,37 @@ export default class HomeScreen extends React.Component {
     }
   };
 
+  _onRefresh = () => {
+    let values = this.state.values;
+    for (let i = 0; i < this.state.values.length; i++) {
+      const number = Math.floor(Math.random() * 10);
+      values[i].value = number;
+    }
+    this.setState({ values });
+  };
+
   configure = () => {};
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />
+        }
+      >
+        {this.state.values.map(value => (
+          <View key={value.title}>
+            <Text>{value.title + ":  " + value.value}</Text>
+          </View>
+        ))}
         <Button
           title="Einstellungen"
           onPress={() => this.props.navigation.navigate("SettingsScreen")}
         />
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -29,9 +66,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: "#fff"
   },
   text: {
     padding: 16,
