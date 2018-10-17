@@ -12,7 +12,8 @@ export default class HomeScreen extends React.Component {
   state = {
     items: [
       { title: "Birkenpollen", selected: true },
-      { title: "CO2", selected: false }
+      { title: "CO2", selected: false },
+      { title: "Wurst", selected: false }
     ],
     modalVisible: false
   };
@@ -36,20 +37,6 @@ export default class HomeScreen extends React.Component {
     });
   }
 
-  componentDidMount() {
-    thisObj = this;
-  }
-  getStyle(item) {
-    try {
-      console.log(thisObj.state.selectedItems[item.key]);
-      return thisObj.state.selectedItems[item.key]
-        ? styles.itemTextSelected
-        : styles.itemText;
-    } catch (e) {
-      return styles.itemText;
-    }
-  }
-
   configure = () => {};
   render() {
     return (
@@ -57,7 +44,9 @@ export default class HomeScreen extends React.Component {
         <Button
           title="Airchecker anpassen"
           onPress={() => this.setState({ modalVisible: true })}
+          // onPress={() => this.props.navigation.navigate("SettingsScreen", {})}
         />
+
         <Modal
           visible={this.state.modalVisible}
           onRequestClose={() => this.setState({ modalVisible: false })}
@@ -69,7 +58,9 @@ export default class HomeScreen extends React.Component {
                 underlayColor="#f00"
                 key={item.title}
               >
-                <Text style={styles.text}>{item.title}</Text>
+                <Text style={styles.text}>
+                  {item.title + " " + item.selected}
+                </Text>
               </TouchableHighlight>
             ))}
           </View>
@@ -86,7 +77,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
-  rootView: {},
   text: {
     padding: 16,
     fontSize: 30
