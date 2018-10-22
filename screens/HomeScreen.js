@@ -11,10 +11,10 @@ import {
 export default class HomeScreen extends React.Component {
   state = {
     refreshing: false,
-    values: [
-      { title: "Birkenpollen", value: 3 },
-      { title: "CO2", value: 5 },
-      { title: "Wurst", value: 2 }
+    items: [
+      { title: "Birkenpollen", value: 3, visible: true },
+      { title: "CO2", value: 5, visible: true },
+      { title: "Wurst", value: 2, visible: true }
     ]
   };
   static navigationOptions = {
@@ -29,12 +29,16 @@ export default class HomeScreen extends React.Component {
   };
 
   _onRefresh = () => {
-    let values = this.state.values;
-    for (let i = 0; i < this.state.values.length; i++) {
+    let items = this.state.items;
+    for (let i = 0; i < this.state.items.length; i++) {
       const number = Math.floor(Math.random() * 10);
-      values[i].value = number;
+      items[i].value = number;
     }
-    this.setState({ values });
+    this.setState({ items });
+  };
+
+  onUpdate = items => {
+    this.setState(items);
   };
 
   configure = () => {};
@@ -49,14 +53,22 @@ export default class HomeScreen extends React.Component {
           />
         }
       >
-        {this.state.values.map(value => (
-          <View key={value.title}>
-            <Text>{value.title + ":  " + value.value}</Text>
-          </View>
-        ))}
+        {this.state.items.map(
+          item =>
+            item.visible && (
+              <View key={item.title}>
+                <Text>{item.title + ":  " + item.value}</Text>
+              </View>
+            )
+        )}
         <Button
           title="Einstellungen"
-          onPress={() => this.props.navigation.navigate("SettingsScreen")}
+          onPress={() =>
+            this.props.navigation.navigate("SettingsScreen", {
+              onUpdate: this.onUpdate,
+              items: this.state.items
+            })
+          }
         />
       </ScrollView>
     );

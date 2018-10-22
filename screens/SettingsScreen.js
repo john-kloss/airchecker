@@ -1,5 +1,11 @@
 import React from "react";
-import { View, StyleSheet, TouchableHighlight, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  Text,
+  Button
+} from "react-native";
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: "Einstellungen",
@@ -12,24 +18,27 @@ export default class SettingsScreen extends React.Component {
     }
   };
 
-  state = {
-    items: [
-      { title: "Birkenpollen", selected: true },
-      { title: "CO2", selected: false },
-      { title: "Wurst", selected: false }
-    ]
-  };
+  componentWillMount() {
+    this.setState({ items: this.props.navigation.state.params.items });
+  }
 
+  // change if item is selected or not
   onItemPressed(item) {
     let items = this.state.items;
     let newItem = items.find(i => {
       return i.title === item.title;
     });
-    newItem.selected = !newItem.selected;
+    newItem.visible = !newItem.visible;
     this.setState({
       items
     });
   }
+
+  goBack = () => {
+    const { navigation } = this.props;
+    navigation.goBack();
+    navigation.state.params.onUpdate(this.state.items);
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -39,9 +48,10 @@ export default class SettingsScreen extends React.Component {
             underlayColor="#f00"
             key={item.title}
           >
-            <Text style={styles.text}>{item.title + " " + item.selected}</Text>
+            <Text style={styles.text}>{item.title + " " + item.visible}</Text>
           </TouchableHighlight>
         ))}
+        <Button title="Übernehmen" onPress={this.goBack} />
       </View>
     );
   }
