@@ -12,9 +12,9 @@ export default class HomeScreen extends React.Component {
   state = {
     refreshing: false,
     items: [
-      { title: "Birkenpollen", value: 3, visible: true },
-      { title: "CO2", value: 5, visible: true },
-      { title: "Wurst", value: 2, visible: true }
+      { title: "Birkenpollen", value: 300, visible: true, threshold1: 333, threshold2:666, status: styles.ok },
+      { title: "CO2", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
+      { title: "Wurst", value: 200, visible: true, threshold1: 333, threshold2:666, status: styles.bad }
     ]
   };
   static navigationOptions = {
@@ -31,8 +31,14 @@ export default class HomeScreen extends React.Component {
   _onRefresh = () => {
     let items = this.state.items;
     for (let i = 0; i < this.state.items.length; i++) {
-      const number = Math.floor(Math.random() * 10);
+      const number = Math.floor(Math.random() * 100000)/100;
       items[i].value = number;
+      if (items[i].value <= items[i].threshold1)
+        {items[i].status = styles.ok }
+      else if (items[i].value <= items[i].threshold2)
+        {items[i].status = styles.average }
+      else 
+        {items[i].status = styles.bad }
     }
     this.setState({ items });
   };
@@ -57,7 +63,12 @@ export default class HomeScreen extends React.Component {
           item =>
             item.visible && (
               <View key={item.title}>
-                <Text>{item.title + ":  " + item.value}</Text>
+                <Text style={item.status}>              
+                  {
+                    
+                    item.title + ":  " + item.value
+                  }
+                </Text>
               </View>
             )
         )}
@@ -70,7 +81,11 @@ export default class HomeScreen extends React.Component {
             })
           }
         />
+
       </ScrollView>
+
+
+
     );
   }
 }
@@ -83,5 +98,16 @@ const styles = StyleSheet.create({
   text: {
     padding: 16,
     fontSize: 30
+  },
+  ok: {
+    color: '#1AB20E',
+  },
+  average: {
+    color: '#F0E314',
+  },
+  bad: {
+    color: '#FF5733',
   }
+
 });
+
