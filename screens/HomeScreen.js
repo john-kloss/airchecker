@@ -14,6 +14,14 @@ export default class HomeScreen extends React.Component {
     items: [
       { title: "Birkenpollen", value: 300, visible: true, threshold1: 333, threshold2:666, status: styles.ok },
       { title: "CO2", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
+      { title: "Benzol", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
+      { title: "Kohlenmonoxid", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
+      { title: "Schwefeldioxid", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
+      { title: "Stickoxid", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
+      { title: "Birkenpollen", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
+      { title: "Esche", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
+      { title: "Weide", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
+      { title: "Pappel", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
       { title: "Wurst", value: 200, visible: true, threshold1: 333, threshold2:666, status: styles.bad }
     ]
   };
