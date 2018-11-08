@@ -12,17 +12,15 @@ export default class HomeScreen extends React.Component {
   state = {
     refreshing: false,
     items: [
-      { title: "Birkenpollen", value: 300, visible: true, threshold1: 333, threshold2:666, status: styles.ok },
-      { title: "CO2", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
-      { title: "Benzol", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
-      { title: "Kohlenmonoxid", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
-      { title: "Schwefeldioxid", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
-      { title: "Stickoxid", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
-      { title: "Birkenpollen", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
-      { title: "Esche", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
-      { title: "Weide", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
-      { title: "Pappel", value: 500, visible: true, threshold1: 333, threshold2:666, status: styles.average },
-      { title: "Wurst", value: 200, visible: true, threshold1: 333, threshold2:666, status: styles.bad }
+      { title: "Birke", visible: true },
+      { title: "Esche", visible: true },
+      { title: "Weide", visible: true },
+      { title: "Pappel", visible: true },
+      { title: "Roggen", visible: true },
+      { title: "Frühblüher", visible: true },
+      { title: "Erle", visible: true },
+      { title: "Gräser", visible: true },
+      { title: "Beifuß", visible: true }
     ]
   };
   static navigationOptions = {
@@ -36,17 +34,15 @@ export default class HomeScreen extends React.Component {
     }
   };
 
+  componentWillMount() {
+    this._onRefresh();
+  }
+
   _onRefresh = () => {
     let items = this.state.items;
     for (let i = 0; i < this.state.items.length; i++) {
-      const number = Math.floor(Math.random() * 100000)/100;
-      items[i].value = number;
-      if (items[i].value <= items[i].threshold1)
-        {items[i].status = styles.ok }
-      else if (items[i].value <= items[i].threshold2)
-        {items[i].status = styles.average }
-      else 
-        {items[i].status = styles.bad }
+      const level = Math.floor(Math.random() * 3);
+      items[i].level = level;
     }
     this.setState({ items });
   };
@@ -70,12 +66,22 @@ export default class HomeScreen extends React.Component {
         {this.state.items.map(
           item =>
             item.visible && (
-              <View key={item.title}>
-                <Text style={item.status}>              
-                  {
-                    
-                    item.title + ":  " + item.value
-                  }
+              <View
+                style={{
+                  padding: 10,
+                  margin: 10,
+                  borderRadius: 5,
+                  backgroundColor:
+                    item.level === 0
+                      ? "green"
+                      : item.level === 1
+                        ? "yellow"
+                        : "red"
+                }}
+                key={item.title}
+              >
+                <Text style={{ textAlign: "center", fontSize: 15 }}>
+                  {item.title}
                 </Text>
               </View>
             )
@@ -89,11 +95,7 @@ export default class HomeScreen extends React.Component {
             })
           }
         />
-
       </ScrollView>
-
-
-
     );
   }
 }
@@ -108,14 +110,12 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   ok: {
-    color: '#1AB20E',
+    color: "#1AB20E"
   },
   average: {
-    color: '#F0E314',
+    color: "#F0E314"
   },
   bad: {
-    color: '#FF5733',
+    color: "#FF5733"
   }
-
 });
-
