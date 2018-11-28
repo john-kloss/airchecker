@@ -7,6 +7,7 @@ import {
   RefreshControl,
   StyleSheet
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export default class HomeScreen extends React.Component {
   state = {
@@ -15,12 +16,12 @@ export default class HomeScreen extends React.Component {
       { title: "Birke", visible: true },
       { title: "Esche", visible: true },
       { title: "Weide", visible: true },
-      { title: "Pappel", visible: true },
-      { title: "Roggen", visible: true },
-      { title: "Frühblüher", visible: true },
-      { title: "Erle", visible: true },
-      { title: "Gräser", visible: true },
-      { title: "Beifuß", visible: true }
+      { title: "Pappel", visible: false },
+      { title: "Roggen", visible: false },
+      { title: "Frühblüher", visible: false },
+      { title: "Erle", visible: false },
+      { title: "Gräser", visible: false },
+      { title: "Beifuß", visible: false }
     ]
   };
   static navigationOptions = {
@@ -63,6 +64,16 @@ export default class HomeScreen extends React.Component {
           />
         }
       >
+        <Ionicons
+          name="md-cog"
+          size={30}
+          onPress={() =>
+            this.props.navigation.navigate("SettingsScreen", {
+              onUpdate: this.onUpdate,
+              items: this.state.items
+            })
+          }
+        />
         {this.state.items.map(
           item =>
             item.visible && (
@@ -75,8 +86,8 @@ export default class HomeScreen extends React.Component {
                     item.level === 0
                       ? "green"
                       : item.level === 1
-                        ? "yellow"
-                        : "red"
+                      ? "yellow"
+                      : "red"
                 }}
                 key={item.title}
               >
@@ -86,15 +97,6 @@ export default class HomeScreen extends React.Component {
               </View>
             )
         )}
-        <Button
-          title="Einstellungen"
-          onPress={() =>
-            this.props.navigation.navigate("SettingsScreen", {
-              onUpdate: this.onUpdate,
-              items: this.state.items
-            })
-          }
-        />
       </ScrollView>
     );
   }
