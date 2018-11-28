@@ -46,7 +46,10 @@ export default class SettingsScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Button title="Übernehmen" onPress={navigation.goBack()} />
+        <Button
+          title="Übernehmen"
+          onPress={() => this.props.navigation.goBack()}
+        />
 
         {this.state.items.map(item => (
           <View style={{ flex: 1 }} key={item.title}>
