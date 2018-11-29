@@ -13,15 +13,14 @@ export default class HomeScreen extends React.Component {
   state = {
     refreshing: false,
     items: [
-      { title: "Birke", visible: true },
-      { title: "Esche", visible: true },
-      { title: "Weide", visible: true },
-      { title: "Pappel", visible: false },
-      { title: "Roggen", visible: false },
-      { title: "Frühblüher", visible: false },
-      { title: "Erle", visible: false },
-      { title: "Gräser", visible: false },
-      { title: "Beifuß", visible: false }
+      { title: "Birke", visible: true, value: 500, threshold1: 33, threshold2:666 },
+      { title: "Esche", visible: true, value: 500, threshold1: 133, threshold2:666 },
+      { title: "Pappel", visible: true, value: 500, threshold1: 233, threshold2:666 },
+      { title: "Roggen", visible: true, value: 500, threshold1: 333, threshold2:666 },
+      { title: "Frühblüher", visible: true, value: 500, threshold1: 433, threshold2:666 },
+      { title: "Erle", visible: true, value: 500, threshold1: 333, threshold2:666 },
+      { title: "Gräser", visible: true, value: 500, threshold1: 333, threshold2:666 },
+      { title: "Beifuß", visible: true, value: 500, threshold1: 333, threshold2:666 },
     ]
   };
   static navigationOptions = {
@@ -44,6 +43,7 @@ export default class HomeScreen extends React.Component {
     for (let i = 0; i < this.state.items.length; i++) {
       const level = Math.floor(Math.random() * 3);
       items[i].level = level;
+      items[i].value = Math.floor(Math.random() * 100000)/100;
     }
     this.setState({ items });
   };
@@ -83,16 +83,16 @@ export default class HomeScreen extends React.Component {
                   margin: 10,
                   borderRadius: 5,
                   backgroundColor:
-                    item.level === 0
+                    item.value < item.threshold1
                       ? "green"
-                      : item.level === 1
+                      : item.value < item.threshold2
                       ? "yellow"
                       : "red"
                 }}
                 key={item.title}
               >
                 <Text style={{ textAlign: "center", fontSize: 15 }}>
-                  {item.title}
+                  {item.title + ": " + item.value + " Einheit "}
                 </Text>
               </View>
             )
@@ -101,6 +101,7 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
