@@ -9,9 +9,12 @@ import {
   ScrollView
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Toast from 'react-native-simple-toast';
+
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
+    
     title: "Einstellungen",
     headerStyle: {
       backgroundColor: "#f4511e"
@@ -28,11 +31,26 @@ export default class SettingsScreen extends React.Component {
 
   // change if item is selected or not
   onItemPressed(item) {
+    Toast.show('item: ' + item.title+ "invisible");
     let items = this.state.items;
     let newItem = items.find(i => {
       return i.title === item.title;
     });
     newItem.visible = !newItem.visible;
+    this.setState({
+      items
+    });
+  }
+
+  onSliderChanged(item, parameter, value) {
+    Toast.show('item: ' + item.title + ' parameter: ' + parameter + ' value: ' + value);
+
+    
+    let items = this.state.items;
+    let newItem = items.find(i => {
+      return i.title === item.title;
+    });
+    newItem[parameter] = value;
     this.setState({
       items
     });
@@ -68,7 +86,21 @@ export default class SettingsScreen extends React.Component {
                 <Text style={styles.text}>{item.title}</Text>
               </View>
             </View>
-            {item.visible && <Slider minimumValue={0} maximumValue={100} />}
+            <Text style={styles.text}>{"threshold1: " + item.threshold1}</Text>
+            {item.visible && <Slider minimumValue={0}
+                                     maximumValue={item.threshold2} 
+                                     step={5}
+                                     value={item.threshold1} 
+                                     onSlidingComplete={(value) => this.onSliderChanged(item, "threshold1", value)}
+                                     />}
+
+            <Text style={styles.text}>{"threshold2: " + item.threshold2}</Text>
+            {item.visible && <Slider minimumValue={item.threshold1} 
+                                     maximumValue={1000} 
+                                     step={5}
+                                     value={item.threshold2} 
+                                     onSlidingComplete={(value) => this.onSliderChanged(item, "threshold2", value)}
+                                     />}
           </View>
         ))}
       </ScrollView>
