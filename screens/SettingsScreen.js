@@ -101,7 +101,7 @@ export default class SettingsScreen extends React.Component {
                 <Text style={styles.text}>{item.title}</Text>
               </View>
             </View>
-            <Text style={styles.text}>{"threshold1: " + item.threshold1}</Text>
+            {item.visible && <Text style={styles.text}>{"threshold1: " + item.threshold1}</Text>}
             {item.visible && <Slider minimumValue={0}
                                      maximumValue={item.threshold2} 
                                      step={5}
@@ -109,17 +109,17 @@ export default class SettingsScreen extends React.Component {
                                      onSlidingComplete={(value) => this.onSliderChanged(item, "threshold1", value)}
                                      />}
 
-            <Text style={styles.text}>{"threshold2: " + item.threshold2}</Text>
+            {item.visible && <Text style={styles.text}>{"threshold2: " + item.threshold2}</Text>}
             {item.visible && <Slider minimumValue={item.threshold1} 
                                      maximumValue={1000} 
                                      step={5}
                                      value={item.threshold2} 
                                      onSlidingComplete={(value) => this.onSliderChanged(item, "threshold2", value)}
                                      />}
-            <Button
-              title="Zurpcksetzen"
+            {item.visible && <Button
+              title="Zurücksetzen"
               onPress={() => this.resetTreshold(item)}
-            />
+            />}
           </View>
         ))}
       </ScrollView>
