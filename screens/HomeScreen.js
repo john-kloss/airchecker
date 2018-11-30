@@ -13,14 +13,14 @@ export default class HomeScreen extends React.Component {
   state = {
     refreshing: false,
     items: [
-      { title: "Birke", visible: true, value: 500, threshold1: 33, threshold2:666 },
-      { title: "Esche", visible: true, value: 500, threshold1: 133, threshold2:666 },
-      { title: "Pappel", visible: true, value: 500, threshold1: 233, threshold2:666 },
-      { title: "Roggen", visible: true, value: 500, threshold1: 333, threshold2:666 },
-      { title: "Frühblüher", visible: true, value: 500, threshold1: 433, threshold2:666 },
-      { title: "Erle", visible: true, value: 500, threshold1: 333, threshold2:666 },
-      { title: "Gräser", visible: true, value: 500, threshold1: 333, threshold2:666 },
-      { title: "Beifuß", visible: true, value: 500, threshold1: 333, threshold2:666 },
+      { title: "Birke", visible: true, value: 500, threshold1: 33, threshold2:666, threshold1recommendet: 33, threshold2recommendet:666 },
+      { title: "Esche", visible: true, value: 500, threshold1: 133, threshold2:666, threshold1recommendet: 133, threshold2recommendet:666 },
+      { title: "Pappel", visible: true, value: 500, threshold1: 233, threshold2:666, threshold1recommendet: 233, threshold2recommendet:666 },
+      { title: "Roggen", visible: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
+      { title: "Frühblüher", visible: true, value: 500, threshold1: 433, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
+      { title: "Erle", visible: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
+      { title: "Gräser", visible: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
+      { title: "Beifuß", visible: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
     ]
   };
   static navigationOptions = {

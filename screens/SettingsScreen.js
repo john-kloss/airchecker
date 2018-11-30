@@ -56,6 +56,21 @@ export default class SettingsScreen extends React.Component {
     });
   }
 
+  resetTreshold(item) {
+    Toast.show(item.title + ' Reset ');
+
+    
+    let items = this.state.items;
+    let newItem = items.find(i => {
+      return i.title === item.title;
+    });
+    newItem.threshold1 = newItem.threshold1recommendet;
+    newItem.threshold2 = newItem.threshold2recommendet;
+    this.setState({
+      items
+    });
+  }
+
   goBack = () => {
     const { navigation } = this.props;
     navigation.goBack();
@@ -101,6 +116,10 @@ export default class SettingsScreen extends React.Component {
                                      value={item.threshold2} 
                                      onSlidingComplete={(value) => this.onSliderChanged(item, "threshold2", value)}
                                      />}
+            <Button
+              title="Zurpcksetzen"
+              onPress={() => this.resetTreshold(item)}
+            />
           </View>
         ))}
       </ScrollView>
