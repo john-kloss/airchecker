@@ -23,19 +23,33 @@ export default class HomeScreen extends React.Component {
       { title: "Beifuß", visible: true, details: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
     ] 
   };
-  static navigationOptions = {
-    title: "Home",
-    headerStyle: {
-      backgroundColor: "#f4511e"
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation;
+    const params = state.params || {};
+    return{
+      title: "Home",
+      headerStyle: {
+        backgroundColor: "#f4511e"
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold"
+      },
+      headerRightContainerStyle: { paddingRight: 10 },
+      headerRight:(<Ionicons
+        name="ios-settings"
+        size={30}
+        onPress={params.navigate}
+        color="white"
+      />)
     }
   };
 
   componentWillMount() {
     this._onRefresh();
+    this.props.navigation.setParams({
+      navigate: this.navigate
+    });
   }
 
   _onRefresh = () => {
@@ -52,6 +66,13 @@ export default class HomeScreen extends React.Component {
     this.setState(items);
   };
 
+  navigate = () =>  {
+    this.props.navigation.navigate("SettingsScreen", {
+      onUpdate: this.onUpdate,
+      items: this.state.items
+    })
+  }
+
   configure = () => {};
   render() {
     return (
@@ -64,16 +85,7 @@ export default class HomeScreen extends React.Component {
           />
         }
       >
-        <Ionicons
-          name="md-cog"
-          size={30}
-          onPress={() =>
-            this.props.navigation.navigate("SettingsScreen", {
-              onUpdate: this.onUpdate,
-              items: this.state.items
-            })
-          }
-        />
+     
         {this.state.items.map(
           item =>
             item.visible && (
