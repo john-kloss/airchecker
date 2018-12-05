@@ -1,37 +1,21 @@
 import React from "react";
-import {
-  ScrollView,
-  View,
-  Text,
-  Button,
-  RefreshControl,
-  StyleSheet
-} from "react-native";
+import { Container, RefreshControl, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import { Ionicons } from "@expo/vector-icons";
+import { ImageBackground, View, StatusBar } from "react-native";
 
 export default class HomeScreen extends React.Component {
   state = {
     refreshing: false,
     items: [
-      { title: "Birke", visible: true, value: 500, threshold1: 33, threshold2:666, threshold1recommendet: 33, threshold2recommendet:666 },
-      { title: "Esche", visible: true, value: 500, threshold1: 133, threshold2:666, threshold1recommendet: 133, threshold2recommendet:666 },
-      { title: "Pappel", visible: true, value: 500, threshold1: 233, threshold2:666, threshold1recommendet: 233, threshold2recommendet:666 },
-      { title: "Roggen", visible: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
-      { title: "Frühblüher", visible: true, value: 500, threshold1: 433, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
-      { title: "Erle", visible: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
-      { title: "Gräser", visible: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
-      { title: "Beifuß", visible: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
-    ]
-  };
-  static navigationOptions = {
-    title: "Home",
-    headerStyle: {
-      backgroundColor: "#f4511e"
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
+      { title: "Birke", visible: true, details: true, value: 500, threshold1: 33, threshold2:666, threshold1recommendet: 33, threshold2recommendet:666 },
+      { title: "Esche", visible: true, details: true, value: 500, threshold1: 133, threshold2:666, threshold1recommendet: 133, threshold2recommendet:666 },
+      { title: "Pappel", visible: true, details: true, value: 500, threshold1: 233, threshold2:666, threshold1recommendet: 233, threshold2recommendet:666 },
+      { title: "Roggen", visible: true, details: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
+      { title: "Frühblüher", visible: true, details: true, value: 500, threshold1: 433, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
+      { title: "Erle", visible: true, details: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
+      { title: "Gräser", visible: true, details: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
+      { title: "Beifuß", visible: true, details: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
+    ] 
   };
 
   componentWillMount() {
@@ -52,32 +36,47 @@ export default class HomeScreen extends React.Component {
     this.setState(items);
   };
 
+  navigate = () =>  {
+    this.props.navigation.navigate("SettingsScreen", {
+      onUpdate: this.onUpdate,
+      items: this.state.items
+    })
+  }
+
   configure = () => {};
   render() {
     return (
-      <ScrollView
-        style={styles.container}
-        refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh}
-          />
-        }
-      >
-        <Ionicons
-          name="md-cog"
-          size={30}
-          onPress={() =>
-            this.props.navigation.navigate("SettingsScreen", {
-              onUpdate: this.onUpdate,
-              items: this.state.items
-            })
-          }
-        />
-        {this.state.items.map(
+    <Container refreshControl={
+      <RefreshControl
+        refreshing={this.state.refreshing}
+        onRefresh={this._onRefresh} />}>
+        <StatusBar barStyle="light-content" />
+      <Header>
+        <Left />
+        <Body>
+          <Title>Home</Title>
+        </Body>
+        <Right>
+        <Button transparent
+                        onPress={() => this.props.navigation.navigate("SettingsScreen", {
+                          onUpdate: this.onUpdate,
+                          items: this.state.items
+                        })
+                      }>
+            <Icon name='menu' />
+          </Button>
+        </Right>
+      </Header>
+      <Content padder>
+      {this.state.items.map(
           item =>
             item.visible && (
-              <View
+              <Button full
+              onPress={() =>     this.props.navigation.navigate("SettingsScreen", {
+                onUpdate: this.onUpdate,
+                items: this.state.items
+              })
+            }
                 style={{
                   padding: 10,
                   margin: 10,
@@ -92,18 +91,29 @@ export default class HomeScreen extends React.Component {
                 key={item.title}
               >
                 <Text style={{ textAlign: "center", fontSize: 15 }}>
-                  {item.title + ": " + item.value + " Einheit "}
+               { item.details
+                      ? item.title + ": " + item.value + " Einheit "
+                      : item.title
+                  }
                 </Text>
-              </View>
+              </Button>
             )
         )}
-      </ScrollView>
+      </Content>
+      <Footer>
+        <FooterTab>
+          <Button full>
+            <Text>Footer</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
+    </Container>
     );
   }
 }
 
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
@@ -121,4 +131,4 @@ const styles = StyleSheet.create({
   bad: {
     color: "#FF5733"
   }
-});
+});*/
