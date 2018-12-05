@@ -97,23 +97,35 @@ export default class SettingsScreen extends React.Component {
                   <Ionicons name="md-eye-off" size={30} color="black" />
                 </TouchableHighlight>
               )}
+              {item.details && (
+                <TouchableHighlight onPress={() => this.onSliderChanged(item, "details", false)}>
+                  <Ionicons name="md-happy" size={30} color="black" />
+                </TouchableHighlight>
+              )}
+              {!item.details && (
+                <TouchableHighlight onPress={() => this.onSliderChanged(item, "details", true)}>
+                  <Ionicons name="md-sad" size={30} color="black" />
+                </TouchableHighlight>
+              )}
               <View underlayColor="#f00">
                 <Text style={styles.text}>{item.title}</Text>
               </View>
             </View>
-            {item.visible && <Text style={styles.text}>{"threshold1: " + item.threshold1}</Text>}
+            {item.visible && <Text style={styles.text}>{"Erhöhte Belastung ab: " + item.threshold1}</Text>}
             {item.visible && <Slider minimumValue={0}
-                                     maximumValue={item.threshold2} 
+                                     maximumValue={1000} 
                                      step={5}
                                      value={item.threshold1} 
+                                     thumbTintColor = {"yellow"}
                                      onSlidingComplete={(value) => this.onSliderChanged(item, "threshold1", value)}
                                      />}
 
-            {item.visible && <Text style={styles.text}>{"threshold2: " + item.threshold2}</Text>}
-            {item.visible && <Slider minimumValue={item.threshold1} 
+            {item.visible && <Text style={styles.text}>{"Starke Belastung ab: " + item.threshold2}</Text>}
+            {item.visible && <Slider minimumValue={0} 
                                      maximumValue={1000} 
                                      step={5}
                                      value={item.threshold2} 
+                                     thumbTintColor = {"red"}
                                      onSlidingComplete={(value) => this.onSliderChanged(item, "threshold2", value)}
                                      />}
             {item.visible && <Button
