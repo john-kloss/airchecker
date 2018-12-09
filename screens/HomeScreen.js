@@ -25,6 +25,9 @@ export default class HomeScreen extends React.Component {
     });
   }
 
+  /**
+   * Refresh Method of the Refresh Control
+   */
   _onRefresh = () => {
     let items = this.state.items;
     for (let i = 0; i < this.state.items.length; i++) {
@@ -35,9 +38,12 @@ export default class HomeScreen extends React.Component {
     this.setState({ items });
   };
 
+  /**
+   * Method for the items in state
+   */
   onUpdate = items => {
     this.setState(items);
-};
+  };
 
   configure = () => {};
   render() {

@@ -22,7 +22,9 @@ componentWillMount() {
   this.setState({ items: this.props.navigation.state.params.items });
   }
 
-  // change if item is selected or not
+  /**
+   * Event Handler Visibilit of Elements (Eye)
+   */
   onItemPressed(item) {
     Toast.show('item: ' + item.title+ "invisible");
     let items = this.state.items;
@@ -35,6 +37,9 @@ componentWillMount() {
     });
   }
 
+  /**
+   * Event Handler for Slider Adjustment
+   */
   onSliderChanged(item, parameter, value) {
     Toast.show('item: ' + item.title + ' parameter: ' + parameter + ' value: ' + value);
 
@@ -49,26 +54,9 @@ componentWillMount() {
     });
   }
 
-  resetTreshold(item) {
-    Toast.show(item.title + ' Reset ');
-
-    
-    let items = this.state.items;
-    let newItem = items.find(i => {
-      return i.title === item.title;
-    });
-    newItem.threshold1 = newItem.threshold1recommendet;
-    newItem.threshold2 = newItem.threshold2recommendet;
-    this.setState({
-      items
-    });
-  }
-
-  goBack = () => {
-    const { navigation } = this.props;
-    navigation.state.params.onUpdate(this.state.items);
-    navigation.goBack();
-  };
+  /**
+   * Resets both slider tresholds of the specific item
+   */
   resetTreshold(item) {
     Toast.show(item.title + " Reset ");
   
@@ -82,17 +70,20 @@ componentWillMount() {
       items
     });
   }
+  /**
+   * Navigation for going back to HomeScreen
+   */
   goBack = () => {
     const { navigation } = this.props;
     navigation.state.params.onUpdate(this.state.items);
     navigation.goBack();
-};
+  };
   render() {
     return (
       <Container>
       <Header>
         <Left style={{flex:1}}>
-        <Button
+        <Button transparent
           title="Übernehmen"
           onPress={() => this.goBack()}>
             <Icon name="arrow-back" />
