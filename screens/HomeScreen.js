@@ -81,10 +81,10 @@ export default class HomeScreen extends React.Component {
                   borderRadius: 5,
                   backgroundColor:
                     item.value < item.threshold1
-                      ? "green"
+                      ? "#1E8C65" //GREEN
                       : item.value < item.threshold2
-                      ? "yellow"
-                      : "red"
+                      ? "#E5CA21" //YELLOW
+                      : "#FF4D41" //RED
                 }}
                 key={item.title}
               >
