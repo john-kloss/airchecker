@@ -1,7 +1,7 @@
 import React from "react";
-import { Container, RefreshControl, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import { Ionicons } from "@expo/vector-icons";
-import { ImageBackground, View, StatusBar } from "react-native";
+import { ImageBackground, View, StatusBar, RefreshControl } from "react-native";
 
 export default class HomeScreen extends React.Component {
   state = {
@@ -17,9 +17,12 @@ export default class HomeScreen extends React.Component {
       { title: "Beifuß", visible: true, details: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
     ] 
   };
-
+  
   componentWillMount() {
     this._onRefresh();
+    this.props.navigation.setParams({
+      navigate: this.navigate
+    });
   }
 
   _onRefresh = () => {
@@ -34,49 +37,38 @@ export default class HomeScreen extends React.Component {
 
   onUpdate = items => {
     this.setState(items);
-  };
-
-  navigate = () =>  {
-    this.props.navigation.navigate("SettingsScreen", {
-      onUpdate: this.onUpdate,
-      items: this.state.items
-    })
-  }
+};
 
   configure = () => {};
   render() {
     return (
-    <Container refreshControl={
-      <RefreshControl
-        refreshing={this.state.refreshing}
-        onRefresh={this._onRefresh} />}>
-        <StatusBar barStyle="light-content" />
+    <Container>
       <Header>
-        <Left />
+        <Left style={{flex:1}} />
         <Body>
-          <Title>Home</Title>
+            <Title>Home</Title>
         </Body>
-        <Right>
-        <Button transparent
-                        onPress={() => this.props.navigation.navigate("SettingsScreen", {
-                          onUpdate: this.onUpdate,
-                          items: this.state.items
-                        })
-                      }>
+        <Right style={{flex:1}}>
+        <Button transparent onPress={() =>this.props.navigation.navigate("SettingsScreen", {
+                            onUpdate: this.onUpdate,
+                            items: this.state.items
+                            })}>
+                      
             <Icon name='menu' />
           </Button>
-        </Right>
+        </Right >
       </Header>
-      <Content padder>
+      <Content refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+          />}>
+        <View>
+        </View>
       {this.state.items.map(
           item =>
             item.visible && (
               <Button full
-              onPress={() =>     this.props.navigation.navigate("SettingsScreen", {
-                onUpdate: this.onUpdate,
-                items: this.state.items
-              })
-            }
                 style={{
                   padding: 10,
                   margin: 10,
@@ -90,7 +82,7 @@ export default class HomeScreen extends React.Component {
                 }}
                 key={item.title}
               >
-                <Text style={{ textAlign: "center", fontSize: 15 }}>
+                <Text style={{ textAlign: "center", fontSize: 15, color: item.backgroundColor == "yellow" ? "000000" : "FFFFFF"}}>
                { item.details
                       ? item.title + ": " + item.value + " Einheit "
                       : item.title
@@ -100,13 +92,6 @@ export default class HomeScreen extends React.Component {
             )
         )}
       </Content>
-      <Footer>
-        <FooterTab>
-          <Button full>
-            <Text>Footer</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
     </Container>
     );
   }
