@@ -125,6 +125,8 @@ componentWillMount() {
                                      onSlidingComplete={(value) => this.onSliderChanged(item, "threshold2", value)}
                                      />}
             {item.visible && <Button style={{position: 'absolute', right: 0}} transparent iconRight><Icon type="FontAwesome" name="undo" onPress={() => this.resetTreshold(item)}/></Button>}
+            {item.details && item.visible && <Button padder bordered iconRight><Text onPress={() => this.onSliderChanged(item, "details", false)}>Details aus</Text></Button>}
+            {!item.details && item.visible && <Button padder iconRight><Text onPress={() => this.onSliderChanged(item, "details", true)}>Details an</Text></Button>}
           </View>
         ))}
         </Content>
