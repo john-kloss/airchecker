@@ -52,7 +52,7 @@ export default class HomeScreen extends React.Component {
       <Header>
         <Left style={{flex:1}} />
         <Body>
-            <Title>Home</Title>
+            <Title>AirChecker</Title>
         </Body>
         <Right style={{flex:1}}>
         <Button transparent onPress={() =>this.props.navigation.navigate("SettingsScreen", {
