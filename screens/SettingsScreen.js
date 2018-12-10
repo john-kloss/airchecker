@@ -1,13 +1,9 @@
 import React from "react";
 import {
   StyleSheet,
-  TouchableHighlight,
-  Slider,
-  ScrollView
+  Slider
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import Toast from 'react-native-simple-toast';
-import HomeScreen from "./HomeScreen";
 import { View, Container, Header, Title, Content, Button, Text, Footer, FooterTab, Left, Right, Body, Icon } from 'native-base';
 
 

@@ -1,7 +1,6 @@
 import React from "react";
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
-import { Ionicons } from "@expo/vector-icons";
-import { ImageBackground, View, StatusBar, RefreshControl } from "react-native";
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, View, Text } from 'native-base';
+import { RefreshControl } from "react-native";
 
 export default class HomeScreen extends React.Component {
   state = {
