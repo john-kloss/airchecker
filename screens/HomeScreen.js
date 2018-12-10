@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  ScrollView,
-  View,
-  Text,
-  Button,
-  RefreshControl,
-  StyleSheet
-} from "react-native";
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import { Ionicons } from "@expo/vector-icons";
+import { ImageBackground, View, StatusBar, RefreshControl } from "react-native";
 
 export default class HomeScreen extends React.Component {
   state = {
@@ -23,28 +17,7 @@ export default class HomeScreen extends React.Component {
       { title: "Beifuß", visible: true, details: true, value: 500, threshold1: 333, threshold2:666, threshold1recommendet: 333, threshold2recommendet:666 },
     ] 
   };
-  static navigationOptions = ({ navigation }) => {
-    const { state } = navigation;
-    const params = state.params || {};
-    return{
-      title: "Home",
-      headerStyle: {
-        backgroundColor: "#f4511e"
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold"
-      },
-      headerRightContainerStyle: { paddingRight: 10 },
-      headerRight:(<Ionicons
-        name="ios-settings"
-        size={30}
-        onPress={params.navigate}
-        color="white"
-      />)
-    }
-  };
-
+  
   componentWillMount() {
     this._onRefresh();
     this.props.navigation.setParams({
@@ -52,6 +25,9 @@ export default class HomeScreen extends React.Component {
     });
   }
 
+  /**
+   * Refresh Method of the Refresh Control
+   */
   _onRefresh = () => {
     let items = this.state.items;
     for (let i = 0; i < this.state.items.length; i++) {
@@ -62,6 +38,9 @@ export default class HomeScreen extends React.Component {
     this.setState({ items });
   };
 
+  /**
+   * Method for the items in state
+   */
   onUpdate = items => {
     this.setState(items);
   };
@@ -76,49 +55,63 @@ export default class HomeScreen extends React.Component {
   configure = () => {};
   render() {
     return (
-      <ScrollView
-        style={styles.container}
-        refreshControl={
+    <Container>
+      <Header>
+        <Left style={{flex:1}} />
+        <Body>
+            <Title>AirChecker</Title>
+        </Body>
+        <Right style={{flex:1}}>
+        <Button transparent onPress={() =>this.props.navigation.navigate("SettingsScreen", {
+                            onUpdate: this.onUpdate,
+                            items: this.state.items
+                            })}>
+                      
+            <Icon name='menu' />
+          </Button>
+        </Right >
+      </Header>
+      <Content refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
             onRefresh={this._onRefresh}
-          />
-        }
-      >
-     
-        {this.state.items.map(
+          />}>
+        <View>
+        </View>
+      {this.state.items.map(
           item =>
             item.visible && (
-              <View
+              <Button full
                 style={{
                   padding: 10,
                   margin: 10,
                   borderRadius: 5,
                   backgroundColor:
                     item.value < item.threshold1
-                      ? "green"
+                      ? "#1E8C65" //GREEN
                       : item.value < item.threshold2
-                      ? "yellow"
-                      : "red"
+                      ? "#E5CA21" //YELLOW
+                      : "#FF4D41" //RED
                 }}
                 key={item.title}
               >
-                <Text style={{ textAlign: "center", fontSize: 15 }}>
+                <Text style={{ textAlign: "center", fontSize: 15, color: item.backgroundColor == "yellow" ? "000000" : "FFFFFF"}}>
                { item.details
                       ? item.title + ": " + item.value + " Einheit "
                       : item.title
                   }
                 </Text>
-              </View>
+              </Button>
             )
         )}
-      </ScrollView>
+      </Content>
+    </Container>
     );
   }
 }
 
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
@@ -136,4 +129,4 @@ const styles = StyleSheet.create({
   bad: {
     color: "#FF5733"
   }
-});
+});*/

@@ -1,50 +1,30 @@
 import React from "react";
 import {
-  View,
   StyleSheet,
   TouchableHighlight,
-  Text,
-  Button,
   Slider,
   ScrollView
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Toast from "react-native-simple-toast";
+import Toast from 'react-native-simple-toast';
+import HomeScreen from "./HomeScreen";
+import { View, Container, Header, Title, Content, Button, Text, Footer, FooterTab, Left, Right, Body, Icon } from 'native-base';
+
 
 export default class SettingsScreen extends React.Component {
   state = {};
   static navigationOptions = ({ navigation }) => {
     const { state } = navigation;
     const params = state.params || {};
-    return {
-      title: "Einstellungen",
-      headerStyle: {
-        backgroundColor: "#f4511e"
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold"
-      },
-      headerLeftContainerStyle: { paddingLeft: 10 },
-      headerLeft: (
-        <Ionicons
-          name="md-arrow-back"
-          size={30}
-          onPress={params.goBack}
-          color="white"
-        />
-      )
-    };
-  };
-
-  componentWillMount() {
-    this.setState({ items: this.props.navigation.state.params.items });
-    this.props.navigation.setParams({
-      goBack: this.goBack
-    });
+return {
+}};
+componentWillMount() {
+  this.setState({ items: this.props.navigation.state.params.items });
   }
 
-  // change if item is selected or not
+  /**
+   * Event Handler Visibilit of Elements (Eye)
+   */
   onItemPressed(item) {
     Toast.show("item: " + item.title + "invisible");
     let items = this.state.items;
@@ -57,6 +37,9 @@ export default class SettingsScreen extends React.Component {
     });
   }
 
+  /**
+   * Event Handler for Slider Adjustment
+   */
   onSliderChanged(item, parameter, value) {
     Toast.show(
       "item: " + item.title + " parameter: " + parameter + " value: " + value
@@ -72,9 +55,12 @@ export default class SettingsScreen extends React.Component {
     });
   }
 
+  /**
+   * Resets both slider tresholds of the specific item
+   */
   resetTreshold(item) {
     Toast.show(item.title + " Reset ");
-
+  
     let items = this.state.items;
     let newItem = items.find(i => {
       return i.title === item.title;
@@ -85,7 +71,9 @@ export default class SettingsScreen extends React.Component {
       items
     });
   }
-
+  /**
+   * Navigation for going back to HomeScreen
+   */
   goBack = () => {
     const { navigation } = this.props;
     navigation.state.params.onUpdate(this.state.items);
@@ -93,19 +81,30 @@ export default class SettingsScreen extends React.Component {
   };
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <Container>
+      <Header>
+        <Left style={{flex:1}}>
+        <Button transparent
+          title="Übernehmen"
+          onPress={() => this.goBack()}>
+            <Icon name="arrow-back" />
+          </Button>
+        </Left>
+        <Body>
+            <Title>Einstellungen</Title>
+        </Body>
+        <Right style={{flex:1}}/>
+      </Header>
+      <Content>
+
         {this.state.items.map(item => (
           <View style={{ flex: 1 }} key={item.title}>
             <View style={{ flexDirection: "row" }}>
               {item.visible && (
-                <TouchableHighlight onPress={() => this.onItemPressed(item)}>
-                  <Ionicons name="md-eye" size={30} color="black" />
-                </TouchableHighlight>
+                <Button transparent iconLeft><Icon type="FontAwesome" name="eye" onPress={() => this.onItemPressed(item)}/></Button>
               )}
               {!item.visible && (
-                <TouchableHighlight onPress={() => this.onItemPressed(item)}>
-                  <Ionicons name="md-eye-off" size={30} color="black" />
-                </TouchableHighlight>
+                <Button transparent iconLeft><Icon type="FontAwesome" name="eye-slash" onPress={() => this.onItemPressed(item)}/></Button>
               )}
               {item.details && (
                 <TouchableHighlight onPress={() => this.onSliderChanged(item, "details", false)}>
@@ -137,14 +136,14 @@ export default class SettingsScreen extends React.Component {
                                      value={item.threshold2} 
                                      thumbTintColor = {"red"}
                                      onSlidingComplete={(value) => this.onSliderChanged(item, "threshold2", value)}
-                                     />}
-            {item.visible && <Button
-              title="Zurücksetzen"
-              onPress={() => this.resetTreshold(item)}
-            />}
+/>}
+            {item.visible && <Button style={{position: 'absolute', right: 0}} transparent iconRight><Icon type="FontAwesome" name="undo" onPress={() => this.resetTreshold(item)}/></Button>}
+            {item.details && item.visible && <Button onPress={() => this.onSliderChanged(item, "details", false)} padder bordered iconRight><Text>Details aus</Text></Button>}
+            {!item.details && item.visible && <Button onPress={() => this.onSliderChanged(item, "details", true)} padder iconRight><Text>Details an</Text></Button>}
           </View>
         ))}
-      </ScrollView>
+        </Content>
+      </Container>
     );
   }
 }
