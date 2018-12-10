@@ -106,16 +106,6 @@ componentWillMount() {
               {!item.visible && (
                 <Button transparent iconLeft><Icon type="FontAwesome" name="eye-slash" onPress={() => this.onItemPressed(item)}/></Button>
               )}
-              {item.details && (
-                <TouchableHighlight onPress={() => this.onSliderChanged(item, "details", false)}>
-                  <Ionicons name="md-happy" size={30} color="black" />
-                </TouchableHighlight>
-              )}
-              {!item.details && (
-                <TouchableHighlight onPress={() => this.onSliderChanged(item, "details", true)}>
-                  <Ionicons name="md-sad" size={30} color="black" />
-                </TouchableHighlight>
-              )}
               <View underlayColor="#f00">
                 <Text style={styles.text}>{item.title}</Text>
               </View>
