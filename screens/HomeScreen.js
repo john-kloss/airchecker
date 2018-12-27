@@ -144,7 +144,7 @@ export default class HomeScreen extends React.Component {
         <Header>
           <Left style={{ flex: 1 }} />
           <Body>
-            <Title>AirChecker</Title>
+            <Title>Übersicht</Title>
           </Body>
           <Right style={{ flex: 1 }}>
             <Button
