@@ -22,16 +22,15 @@ const AppNavigator = createStackNavigator({
 
 async function getInitialScreen() {
   const value = await AsyncStorage.getItem("alreadyLaunched");
-  console.log("Das bin ich: " + value);
     if(value !== null){
-         AsyncStorage.setItem('alreadyLaunched', true);
-          console.log("First time use!");
-          return true;
+        AsyncStorage.setItem('alreadyLaunched', true);
+        console.log("First time use!");
+        return true;
     }
     else{
         console.log("Not first Time use!");
         AsyncStorage.removeItem('alreadyLaunched');
-         return false;
+        return false;
     }
 }
 export default class Navigation extends Component {

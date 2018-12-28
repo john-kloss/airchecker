@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Image, Dimensions, StyleSheet, StatusBar} from 'react-native';
-import { Container, Header, Content, Textarea, List, ListItem, Text, H1, Icon, Button, View } from 'native-base';
+import {Image, Dimensions, StyleSheet, StatusBar, View} from 'react-native';
+import { Container, Header, Content, Textarea, List, ListItem, Text, H1, Icon, Button } from 'native-base';
 import { IndicatorViewPager, PagerDotIndicator} from 'rn-viewpager';
 
 
@@ -9,16 +9,16 @@ export default class TourScreen extends Component {
     let {height, width} = Dimensions.get('window');
     return (
       <Container style={{backgroundColor: "#252525"}}>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, flexDirection: 'column', flexWrap: 'wrap'}}>
           <IndicatorViewPager
                     ref={viewPager => { this.viewPager = viewPager; }}
                     style={{flex: 1}}
                     indicator={this._renderDotIndicator()}>
                     <View style={styles.container}>
-                      <Image source={require('../assets/icon.png')} style={styles.image}/>
-                      <H1 style={styles.headline}>Willkommen im Airchecker</H1>
+                      <Image source={require('../assets/icon.png')} style={styles.thumbnail}/>
+                      <H1 style={[styles.headline, {top: 0}]}>Willkommen im Airchecker</H1>
                       <Text style={[styles.descriptions, {top: 10}]}>
-                      Nachfolgend möchten wir dich kurz durch die Kernfeatures der App führen und dir zeigen, was der Airchecker Alles für dich machen kann.
+                      Nachfolgend möchten wir dich kurz durch die Kernfeatures der App führen und dir zeigen, was der Airchecker alles für dich machen kann.
                       </Text>
                       <Button style={{top: 25}} onPress={() => this.viewPager.setPage(1)} block padder>
                         <Text>Los gehts!</Text>
@@ -42,7 +42,7 @@ export default class TourScreen extends Component {
                     <H1 style={styles.headline}>Persönliche Einstellungen</H1>
                       <Image source={require('../assets/tour4.jpg')} style={styles.image}/>
                       <Text style={styles.descriptions}>
-                      Über das <Icon style={{color: "#ffffff"}} fontSize={40} name="menu" /> Icon gelangst du ins Einstellungsmenü. In diesem Menü kannst du alle verfügbaren Schadstoffe über das <Icon style={{color: "#ffffff"}} fontSize={20} type="FontAwesome" name="eye"/> Icon an- oder abwählen.
+                      Über das <Icon style={{fontSize: 18, color: "#ffffff"}} name="menu" /> Icon gelangst du ins Einstellungsmenü. In diesem Menü kannst du alle verfügbaren Schadstoffe über das <Icon style={{fontSize: 18, color: "#ffffff"}} type="FontAwesome" name="eye"/> Icon an- oder abwählen.
                       </Text>
                     </View>
                     <View style={styles.container}>
@@ -85,17 +85,23 @@ const styles = StyleSheet.create({
     bottom: 2,
     right: 16
   },
-  image: {
+  thumbnail: {
     width: windowWidth * 0.8,
     height: windowHeight * 0.6,
     resizeMode: 'contain',
   },
-  headline: {
+  image: {
     top: 10,
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.7,
+    resizeMode: 'contain',
+  },
+  headline: {
+    top: 20,
     bottom: 20,
     textAlign: "center",
     textAlignVertical: "center",
-    color: "#fff"
+    color: "#fff",
   },
   descriptions: {
     textAlign: "center",
