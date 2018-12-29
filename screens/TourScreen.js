@@ -18,7 +18,7 @@ export default class TourScreen extends Component {
                       <Image source={require('../assets/icon.png')} style={styles.thumbnail}/>
                       <H1 style={[styles.headline, {top: 0}]}>Willkommen im Airchecker</H1>
                       <Text style={[styles.descriptions, {top: 10}]}>
-                      Nachfolgend möchten wir dich kurz durch die Kernfeatures der App führen und dir zeigen, was der Airchecker alles für dich machen kann.
+                      Nachfolgend möchten wir dich kurz durch die Kernfunktionen der App führen und dir zeigen, was der Airchecker alles für dich machen kann.
                       </Text>
                       <Button style={{top: 25}} onPress={() => this.viewPager.setPage(1)} block padder>
                         <Text>Los gehts!</Text>
@@ -35,7 +35,7 @@ export default class TourScreen extends Component {
                     <H1 style={styles.headline}>Aktualisieren</H1>
                       <Image source={require('../assets/tour2_refresh.jpg')} style={styles.image}/>
                       <Text style={styles.descriptions}>
-                      Durch einen 'Swipe Down' kannst du Ansicht aktualisieren und so jederzeit die aktuellen Schadstoffwerte erneut vom Airchecker anfordern.
+                      Durch einen 'Swipe Down' kannst du die Ansicht aktualisieren und so jederzeit die aktuellen Schadstoffwerte erneut vom Airchecker anfordern.
                       </Text>
                     </View>
                     <View style={styles.container}>
