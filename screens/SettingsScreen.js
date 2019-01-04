@@ -87,38 +87,44 @@ export default class SettingsScreen extends React.Component {
               title="Übernehmen"
               onPress={() => this.goBack()}
             >
-              <Icon name="arrow-back" />
+              <Icon name='arrow-back' />
             </Button>
           </Left>
           <Body>
             <Title>Einstellungen</Title>
           </Body>
-          <Right style={{ flex: 1 }} />
+          <Right style={{ flex: 1 }}>
+          <Button
+              transparent
+              title="Hilfe"
+              onPress={() => this.props.navigation.navigate("TourScreen")}
+            >
+              <Icon type="FontAwesome" name="info" />
+            </Button>
+          </Right>
         </Header>
         <Content>
           {this.state.items.map(item => (
             <View style={{ flex: 1 }} key={item.title}>
               <View style={{ flexDirection: "row" }}>
                 {item.visible && (
-                  <Button transparent iconLeft>
+                  <Button transparent onPress={() => this.onItemPressed(item)} iconLeft>
                     <Icon
                       type="FontAwesome"
                       name="eye"
-                      onPress={() => this.onItemPressed(item)}
                     />
                   </Button>
                 )}
                 {!item.visible && (
-                  <Button transparent iconLeft>
+                  <Button transparent onPress={() => this.onItemPressed(item)} iconLeft>
                     <Icon
                       type="FontAwesome"
                       name="eye-slash"
-                      onPress={() => this.onItemPressed(item)}
                     />
                   </Button>
                 )}
                 <View underlayColor="#f00">
-                  <Text style={styles.text}>{item.title}</Text>
+                  <Text onPress={() => this.onItemPressed(item)} style={styles.text}>{item.title}</Text>
                 </View>
               </View>
               {item.visible && (
@@ -177,7 +183,6 @@ export default class SettingsScreen extends React.Component {
                         this.onSliderChanged(item, "details", false)
                       }
                       padder
-                      bordered
                       iconRight
                     >
                       <Text>Details aus</Text>
@@ -190,6 +195,7 @@ export default class SettingsScreen extends React.Component {
                         this.onSliderChanged(item, "details", true)
                       }
                       padder
+                      bordered
                       iconRight
                     >
                       <Text>Details an</Text>
