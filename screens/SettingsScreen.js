@@ -163,19 +163,6 @@ export default class SettingsScreen extends React.Component {
                 />
               )}
               {item.visible && (
-                <Button
-                  style={{ position: "absolute", right: 0 }}
-                  transparent
-                  iconRight
-                >
-                  <Icon
-                    type="FontAwesome"
-                    name="undo"
-                    onPress={() => this.resetTreshold(item)}
-                  />
-                </Button>
-              )}
-              {item.visible && (
                 <View style={{ padding: 10 }}>
                   {item.details && (
                     <Button
@@ -183,9 +170,10 @@ export default class SettingsScreen extends React.Component {
                         this.onSliderChanged(item, "details", false)
                       }
                       padder
+                      bordered
                       iconRight
                     >
-                      <Text>Details aus</Text>
+                      <Text>Einheiten aus</Text>
                     </Button>
                   )}
 
@@ -195,10 +183,9 @@ export default class SettingsScreen extends React.Component {
                         this.onSliderChanged(item, "details", true)
                       }
                       padder
-                      bordered
                       iconRight
                     >
-                      <Text>Details an</Text>
+                      <Text>Einheiten an</Text>
                     </Button>
                   )}
                 </View>
