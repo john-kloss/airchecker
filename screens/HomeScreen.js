@@ -196,7 +196,7 @@ export default class HomeScreen extends React.Component {
                     }}
                   >
                     {item.details
-                      ? item.title + ": " + item.value + " Einheit "
+                      ? item.title + ": " + item.value + " µg/m3"
                       : item.title}
                   </Text>
                 </Button>
