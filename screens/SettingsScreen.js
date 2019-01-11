@@ -123,45 +123,30 @@ export default class SettingsScreen extends React.Component {
                     />
                   </Button>
                 )}
+
+                
                 <View underlayColor="#f00">
                   <Text onPress={() => this.onItemPressed(item)} style={styles.text}>{item.title}</Text>
                 </View>
               </View>
               {item.visible && (
                 <Text style={styles.text}>
-                  {"Erhöhte Belastung ab: " + item.threshold1}
+                  {"Allergielevel: " + item.level}
                 </Text>
               )}
               {item.visible && (
                 <Slider
                   minimumValue={0}
-                  maximumValue={1000}
-                  step={5}
-                  value={item.threshold1}
+                  maximumValue={5}
+                  step={1}
+                  value={item.level}
                   thumbTintColor={"yellow"}
                   onSlidingComplete={value =>
-                    this.onSliderChanged(item, "threshold1", value)
+                    this.onSliderChanged(item, "level", value)
                   }
                 />
               )}
 
-              {item.visible && (
-                <Text style={styles.text}>
-                  {"Starke Belastung ab: " + item.threshold2}
-                </Text>
-              )}
-              {item.visible && (
-                <Slider
-                  minimumValue={0}
-                  maximumValue={1000}
-                  step={5}
-                  value={item.threshold2}
-                  thumbTintColor={"red"}
-                  onSlidingComplete={value =>
-                    this.onSliderChanged(item, "threshold2", value)
-                  }
-                />
-              )}
               {item.visible && (
                 <View style={{ padding: 10 }}>
                   {item.details && (
