@@ -28,28 +28,37 @@ export default class TourScreen extends Component {
                       <H1 style={styles.headline}>Startseite</H1>
                       <Image source={require('../assets/tour1.jpg')} style={styles.image}/>
                       <Text style={styles.descriptions}>
-                      Hier findest du eine Übersicht aller Luftschadstoffe mit den aktuellen gemessenen Werten, die der Airchecker erfassen kann. Dies ist deine Startseite!
+                      Dies ist deine Startseite. Hier findest du eine Übersicht aller Luftschadstoffe mit den aktuellen gemessenen Werten, die der Airchecker erfassen kann.
                       </Text>
+                      <Button transparent onPress={() => this.viewPager.setPage(2)} style={styles.doneButton}>
+                        <Icon type="FontAwesome" name="angle-right"/>
+                      </Button>
                     </View>
                     <View style={styles.container}>
                     <H1 style={styles.headline}>Aktualisieren</H1>
                       <Image source={require('../assets/tour2_refresh.jpg')} style={styles.image}/>
                       <Text style={styles.descriptions}>
-                      Durch einen 'Swipe Down' kannst du die Ansicht aktualisieren und so jederzeit die aktuellen Schadstoffwerte erneut vom Airchecker anfordern.
+                      Streiche mit deinem Finger einfach von oben nach unten über das Display, um die Übersicht zu aktualisieren. Dadurch forderst du jederzeit die aktuellen Schadstoffwerte erneut vom Airchecker anfordern.
                       </Text>
+                      <Button transparent onPress={() => this.viewPager.setPage(3)} style={styles.doneButton}>
+                        <Icon type="FontAwesome" name="angle-right"/>
+                      </Button>
                     </View>
                     <View style={styles.container}>
                     <H1 style={styles.headline}>Persönliche Einstellungen</H1>
                       <Image source={require('../assets/tour4.jpg')} style={styles.image}/>
                       <Text style={styles.descriptions}>
-                      Über das <Icon style={{fontSize: 18, color: "#ffffff"}} name="menu" /> Icon gelangst du ins Einstellungsmenü. In diesem Menü kannst du alle verfügbaren Schadstoffe über das <Icon style={{fontSize: 18, color: "#ffffff"}} type="FontAwesome" name="eye"/> Icon an- oder abwählen.
+                      Über das <Icon style={{fontSize: 18, color: "#ffffff"}} name="menu" /> Icon gelangst du ins Einstellungsmenü. In diesem Menü kannst du alle verfügbaren Schadstoffe über das <Icon style={{fontSize: 18, color: "#ffffff"}} type="FontAwesome" name="eye"/> Icon ein- und ausblenden.
                       </Text>
+                      <Button transparent onPress={() => this.viewPager.setPage(4)} style={styles.doneButton}>
+                        <Icon type="FontAwesome" name="angle-right"/>
+                      </Button>
                     </View>
                     <View style={styles.container}>
                     <H1 style={styles.headline}>Belastungswerte anpassen</H1>
                       <Image source={require('../assets/tour3_settings.jpg')} style={styles.image}/>
                       <Text style={styles.descriptions}>
-                      Zudem kannst du für jeden Schadstoff deine persönlichen Belastungswerte festlegen. Über "Details An/Aus" kannst du die Einheiten auch gerne ausblenden.
+                      Zudem kannst du für jeden Schadstoff deine persönlichen Belastungswerte festlegen. Über "Einheit An/Aus" kannst du die Einheiten in der Übersicht auch gerne ausblenden.
                       </Text>
                       <Button iconRight bordered onPress={() => this.props.navigation.navigate("HomeScreen")} style={styles.doneButton}>
                         <Text>OK</Text>

@@ -25,30 +25,31 @@ export default class HomeScreen extends React.Component {
         visible: true,
         details: true,
         value: 500,
+        level: 1,
         threshold1: 33,
         threshold2: 666,
-        threshold1recommendet: 33,
-        threshold2recommendet: 666
+        settings: false
+
       },
       {
         title: "Esche",
         visible: true,
         details: true,
         value: 500,
+        level: 1,
         threshold1: 133,
         threshold2: 666,
-        threshold1recommendet: 133,
-        threshold2recommendet: 666
+        settings: false
       },
       {
         title: "Pappel",
         visible: true,
         details: true,
         value: 500,
+        level: 1,
         threshold1: 233,
         threshold2: 666,
-        threshold1recommendet: 233,
-        threshold2recommendet: 666
+        settings: false
       },
       {
         title: "Roggen",
@@ -57,48 +58,47 @@ export default class HomeScreen extends React.Component {
         value: 500,
         threshold1: 333,
         threshold2: 666,
-        threshold1recommendet: 333,
-        threshold2recommendet: 666
+        settings: false
       },
       {
         title: "Frühblüher",
         visible: false,
         details: true,
         value: 500,
+        level: 1,
         threshold1: 433,
         threshold2: 666,
-        threshold1recommendet: 333,
-        threshold2recommendet: 666
+        settings: false
       },
       {
         title: "Erle",
         visible: false,
         details: true,
         value: 500,
+        level: 1,
         threshold1: 333,
         threshold2: 666,
-        threshold1recommendet: 333,
-        threshold2recommendet: 666
+        settings: false
       },
       {
         title: "Gräser",
         visible: false,
         details: true,
         value: 500,
+        level: 1,
         threshold1: 333,
         threshold2: 666,
-        threshold1recommendet: 333,
-        threshold2recommendet: 666
+        settings: false
       },
       {
         title: "Beifuß",
         visible: false,
         details: true,
         value: 500,
+        level: 1,
         threshold1: 333,
         threshold2: 666,
-        threshold1recommendet: 333,
-        threshold2recommendet: 666
+        settings: false
       }
     ]
   };
@@ -196,7 +196,7 @@ export default class HomeScreen extends React.Component {
                     }}
                   >
                     {item.details
-                      ? item.title + ": " + item.value + " Einheit "
+                      ? item.title + ": " + item.value + " µg/m3"
                       : item.title}
                   </Text>
                 </Button>
