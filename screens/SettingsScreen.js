@@ -8,8 +8,7 @@ import {
   Content,
   Button,
   Text,
-  Footer,
-  FooterTab,
+  Switch,
   Left,
   Right,
   Body,
@@ -56,20 +55,6 @@ export default class SettingsScreen extends React.Component {
   }
 
   /**
-   * Resets both slider tresholds of the specific item
-   */
-  resetTreshold(item) {
-    let items = this.state.items;
-    let newItem = items.find(i => {
-      return i.title === item.title;
-    });
-    newItem.threshold1 = newItem.threshold1recommendet;
-    newItem.threshold2 = newItem.threshold2recommendet;
-    this.setState({
-      items
-    });
-  }
-  /**
    * Navigation for going back to HomeScreen
    */
   goBack = () => {
@@ -94,7 +79,7 @@ export default class SettingsScreen extends React.Component {
             <Title>Einstellungen</Title>
           </Body>
           <Right style={{ flex: 1 }}>
-          <Button
+            <Button
               transparent
               title="Hilfe"
               onPress={() => this.props.navigation.navigate("TourScreen")}
@@ -124,7 +109,7 @@ export default class SettingsScreen extends React.Component {
                   </Button>
                 )}
 
-                
+
                 <View underlayColor="#f00">
                   <Text onPress={() => this.onItemPressed(item)} style={styles.text}>{item.title}</Text>
                 </View>
@@ -149,6 +134,7 @@ export default class SettingsScreen extends React.Component {
 
               {item.visible && (
                 <View style={{ padding: 10 }}>
+                
                   {item.details && (
                     <Button
                       onPress={() =>
@@ -186,7 +172,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    padding: 10
+    padding: 20
   },
   text: {
     padding: 10,

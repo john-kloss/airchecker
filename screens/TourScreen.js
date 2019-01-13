@@ -38,7 +38,7 @@ export default class TourScreen extends Component {
                     <H1 style={styles.headline}>Aktualisieren</H1>
                       <Image source={require('../assets/tour2_refresh.jpg')} style={styles.image}/>
                       <Text style={styles.descriptions}>
-                      Streiche mit deinem Finger einfach von oben nach unten über das Display, um die Übersicht zu aktualisieren. Dadurch forderst du jederzeit die aktuellen Schadstoffwerte erneut vom Airchecker anfordern.
+                      Streiche mit deinem Finger einfach von oben nach unten über das Display, um die Übersicht zu aktualisieren. So lädt der Airchecker erneut die aktuellen Schadstoffwerte .
                       </Text>
                       <Button transparent onPress={() => this.viewPager.setPage(3)} style={styles.doneButton}>
                         <Icon type="FontAwesome" name="angle-right"/>
@@ -58,7 +58,7 @@ export default class TourScreen extends Component {
                     <H1 style={styles.headline}>Belastungswerte anpassen</H1>
                       <Image source={require('../assets/tour3_settings.jpg')} style={styles.image}/>
                       <Text style={styles.descriptions}>
-                      Zudem kannst du für jeden Schadstoff deine persönlichen Belastungswerte festlegen. Über "Einheit An/Aus" kannst du die Einheiten in der Übersicht auch gerne ausblenden.
+                      Zudem kannst du für jeden Schadstoff deine persönlichen Belastungswerte (wie stark bist du gegen den bestimmten Stoff allergisch) festlegen. Über "Einheit An/Aus" kannst du die Einheiten in der Übersicht auch gerne ausblenden.
                       </Text>
                       <Button iconRight bordered onPress={() => this.props.navigation.navigate("HomeScreen")} style={styles.doneButton}>
                         <Text>OK</Text>

@@ -137,7 +137,7 @@ export default class HomeScreen extends React.Component {
     });
   };
 
-  configure = () => {};
+  configure = () => { };
   render() {
     return (
       <Container>
@@ -169,10 +169,22 @@ export default class HomeScreen extends React.Component {
           }
         >
           <View />
+          {this.state.items.filter(i => i.visible).length === 0 &&
+            <View>
+              <Text style={{
+                textAlign: "center",
+                fontSize: 15,
+                padding: 10
+              }}>
+                Aktuell sind keine Allergene ausgewählt.
+                Nutze die Einstellungen, um etwas einzublenden.
+              </Text>
+            </View>
+          }
           {this.state.items.map(
             item =>
               item.visible && (
-                <Button
+                <View
                   full
                   style={{
                     padding: 10,
@@ -180,10 +192,10 @@ export default class HomeScreen extends React.Component {
                     borderRadius: 5,
                     backgroundColor:
                       item.value < item.threshold1
-                        ? "#1E8C65" //GREEN
+                        ? "green"
                         : item.value < item.threshold2
-                        ? "#E5CA21" //YELLOW
-                        : "#FF4D41" //RED
+                          ? "yellow"
+                          : "red"
                   }}
                   key={item.title}
                 >
@@ -199,7 +211,7 @@ export default class HomeScreen extends React.Component {
                       ? item.title + ": " + item.value + " µg/m3"
                       : item.title}
                   </Text>
-                </Button>
+                </View>
               )
           )}
         </Content>
@@ -207,23 +219,3 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
-
-/*const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff"
-  },
-  text: {
-    padding: 16,
-    fontSize: 30
-  },
-  ok: {
-    color: "#1AB20E"
-  },
-  average: {
-    color: "#F0E314"
-  },
-  bad: {
-    color: "#FF5733"
-  }
-});*/
