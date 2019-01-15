@@ -124,6 +124,7 @@ export default class SettingsScreen extends React.Component {
                   minimumValue={0}
                   maximumValue={5}
                   step={1}
+                  style={{padding: 20}}
                   value={item.level}
                   thumbTintColor={"yellow"}
                   onSlidingComplete={value =>
@@ -158,6 +159,7 @@ export default class SettingsScreen extends React.Component {
                     >
                       <Text>Einheiten an</Text>
                     </Button>
+                    
                   )}
                 </View>
               )}

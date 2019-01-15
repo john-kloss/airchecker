@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   image: {
     top: 10,
     width: windowWidth * 0.8,
-    height: windowHeight * 0.7,
+    height: windowHeight * 0.6,
     resizeMode: 'contain',
   },
   headline: {
