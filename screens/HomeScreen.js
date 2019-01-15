@@ -142,7 +142,15 @@ export default class HomeScreen extends React.Component {
     return (
       <Container>
         <Header>
-          <Left style={{ flex: 1 }} />
+          <Left style={{ flex: 1 }}>
+            <Button
+                transparent
+                onPress={() => this._onRefresh()
+                }
+              >
+              <Icon type="FontAwesome" name="refresh" />
+            </Button>
+          </Left>
           <Body>
             <Title>Übersicht</Title>
           </Body>
