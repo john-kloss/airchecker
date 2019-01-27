@@ -38,7 +38,7 @@ export default class TourScreen extends Component {
                     <H1 style={styles.headline}>Aktualisieren</H1>
                       <Image source={require('../assets/tour2_refresh.jpg')} style={styles.image}/>
                       <Text style={styles.descriptions}>
-                      Streiche mit deinem Finger einfach von oben nach unten über das Display, um die Übersicht zu aktualisieren. So lädt der Airchecker erneut die aktuellen Schadstoffwerte .
+                      Streiche mit deinem Finger einfach von oben nach unten über das Display oder nutze das <Icon style={{fontSize: 18, color: "#ffffff"}} type="FontAwesome" name="refresh" /> Icon, um die Übersicht zu aktualisieren. So lädt der Airchecker erneut die aktuellen Schadstoffwerte .
                       </Text>
                       <Button transparent onPress={() => this.viewPager.setPage(3)} style={styles.doneButton}>
                         <Icon type="FontAwesome" name="angle-right"/>
